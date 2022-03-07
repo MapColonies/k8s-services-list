@@ -26,14 +26,14 @@ export const registerExternalValues = (options?: RegisterOptions): DependencyCon
   tracing.start();
   const tracer = trace.getTracer(SERVICE_NAME);
 
-  const k8s = new K8sOperations(logger)
+  const k8s = new K8sOperations(logger, config)
 
   const dependencies: InjectionObject<unknown>[] = [
     { token: SERVICES.CONFIG, provider: { useValue: config } },
     { token: SERVICES.LOGGER, provider: { useValue: logger } },
     { token: SERVICES.TRACER, provider: { useValue: tracer } },
     { token: SERVICES.METER, provider: { useValue: meter } },
-    { token: SERVICES.K8S_OPERATIONS, provider: {useValue: k8s} },
+    { token: SERVICES.K8S_OPERATIONS, provider: { useValue: k8s } },
     { token: GET_SERVICES_FROM_K8S_ROUTER_SYMBOL, provider: { useFactory: getServicesFromK8sRouterFactory } },
     {
       token: 'onSignal',

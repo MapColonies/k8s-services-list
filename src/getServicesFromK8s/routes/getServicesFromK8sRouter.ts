@@ -8,7 +8,14 @@ const getServicesFromK8sRouterFactory: FactoryFunction<Router> = (dependencyCont
     const k8s = dependencyContainer.resolve(K8sOperations)
 
   router.get('/getServices', (req, res, next) => {
-    res.send('HELLO FROM GET SERVICES!')
+    void (async (): Promise<void> => {
+      try{
+        const podList = await k8s.getServicesFromCluster();
+        res.send(podList)
+      }catch(e) {
+        next(e)
+      }
+    })();
   });
 
   return router;
