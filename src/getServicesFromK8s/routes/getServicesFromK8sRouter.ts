@@ -18,6 +18,18 @@ const getServicesFromK8sRouterFactory: FactoryFunction<Router> = (dependencyCont
     })();
   });
 
+  router.get('/getDeployments', (req, res, next) => {
+    void (async (): Promise<void> => {
+      try{
+        const podList = await k8s.getDeployments();
+        res.send(podList)
+      }catch(e) {
+        next(e)
+      }
+    })();
+  });
+
+
   return router;
 };
 
