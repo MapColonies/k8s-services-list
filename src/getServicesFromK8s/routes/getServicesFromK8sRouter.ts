@@ -1,33 +1,13 @@
 import { Router } from 'express';
 import { FactoryFunction } from 'tsyringe';
 import K8sOperations from '../../common/utils/k8sOperations';
+import GetServicesFromK8sController from '../controllers/getServicesFromK8sController';
 
 const getServicesFromK8sRouterFactory: FactoryFunction<Router> = (dependencyContainer) => {
   const router = Router();
-//   const controller = dependencyContainer.resolve(AnotherResourceController);
-    const k8s = dependencyContainer.resolve(K8sOperations)
-
-  router.get('/getServices', (req, res, next) => {
-    void (async (): Promise<void> => {
-      try{
-        const podList = await k8s.getServicesFromCluster();
-        res.send(podList)
-      }catch(e) {
-        next(e)
-      }
-    })();
-  });
-
-  router.get('/getDeployments', (req, res, next) => {
-    void (async (): Promise<void> => {
-      try{
-        const podList = await k8s.getDeployments();
-        res.send(podList)
-      }catch(e) {
-        next(e)
-      }
-    })();
-  });
+  const controller = dependencyContainer.resolve(GetServicesFromK8sController);
+  
+  router.get('/getDeploymentsAndServices', controller.getDeploymentsAndServicesFromCluster);
 
 
   return router;
