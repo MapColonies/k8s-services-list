@@ -19,6 +19,14 @@ data:
   TELEMETRY_METRICS_ENABLED: 'true'
   TELEMETRY_METRICS_URL: {{ $metricsUrl }}
   {{ end }}
+<<<<<<< HEAD
   K8S_NAMESPACE: {{.Values.kubernetes.namespace | quote}}
+=======
+  K8S_NAMESPACES: 
+    {{- range $namespace := .Values.kubernetes.namespaces }}
+    - {{ $namespace | quote}}
+    {{- end }}
+    - {{ $.Release.Namespace | quote }}
+>>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
   K8S_LOAD_CONFIG_FROM_CLUSTER: "true"
 {{- end }}

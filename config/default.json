@@ -26,7 +26,11 @@
     }
   },
   "kubernetes": {
+<<<<<<< HEAD
     "namespace": "default",
+=======
+    "namespaces": ["default"],
+>>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
     "loadConfigFromCluster": false
   }
 }

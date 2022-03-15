@@ -1,10 +1,14 @@
 {{- $releaseName := .Release.Name -}}
 {{- $chartName := include "service-discovery.name" . -}}
+<<<<<<< HEAD
 
+=======
+>>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: {{ $releaseName }}-{{ $chartName }}
+<<<<<<< HEAD
   namespace: {{ .Release.Namespace | quote }}
   labels:
     app: {{ $chartName }}
@@ -12,12 +16,24 @@ metadata:
     environment: {{ include "service-discovery.environment" $ }}
     release: {{ $releaseName }}
 
+=======
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ $chartName }}
+    component: {{ $chartName }}
+    environment: {{ include "service-discovery.environment" . }}
+    release: {{ $releaseName }}
+>>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: {{ $releaseName }}-{{ $chartName }}
+<<<<<<< HEAD
   namespace: {{ .Release.Namespace | quote }}
+=======
+  namespace: {{ .Release.Namespace }}
+>>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
@@ -31,16 +47,28 @@ rules:
   resources: ["deployments"]
   verbs: ["get", "watch", "list"]
 
+<<<<<<< HEAD
+=======
+{{- range $namespace := .Values.kubernetes.namespaces }}
+>>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ $releaseName }}-{{ $chartName }}
+<<<<<<< HEAD
   namespace: {{ .Release.Namespace | quote }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
     environment: {{ include "service-discovery.environment" . }}
+=======
+  namespace: {{ $namespace }}
+  labels:
+    app: {{ $chartName }}
+    component: {{ $chartName }}
+    environment: {{ include "service-discovery.environment" $ }}
+>>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
     release: {{ $releaseName }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -49,4 +77,10 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ $releaseName }}-{{ $chartName }}
+<<<<<<< HEAD
     namespace: {{ .Release.Namespace | quote }}
+=======
+    namespace: {{ $namespace }}
+---
+{{- end }}
+>>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
