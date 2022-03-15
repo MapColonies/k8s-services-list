@@ -40,14 +40,7 @@
     }
   },
   "kubernetes": {
-<<<<<<< HEAD
     "namespace": "K8S_NAMESPACE",
-=======
-    "namespaces": {
-      "__name": "K8S_NAMESPACES",
-      "__format": "array"
-    },
->>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
     "loadConfigFromCluster": {
       "__name": "K8S_LOAD_CONFIG_FROM_CLUSTER",
       "__format": "boolean"
