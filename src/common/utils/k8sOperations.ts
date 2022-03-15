@@ -3,17 +3,17 @@ import { inject, injectable } from 'tsyringe';
 import * as K8S from '@kubernetes/client-node';
 import { V1Deployment, V1EndpointsList, V1ServiceList } from '@kubernetes/client-node';
 import { SERVICES } from '../constants';
-import { IConfig } from '../interfaces';
+import { DepsAndServices, IConfig, K8sService } from '../interfaces';
 
 @injectable()
 class K8sOperations {
   private readonly corek8sApi: K8S.CoreV1Api;
   private readonly appsK8s: K8S.AppsV1Api;
-  private readonly defaultNs: string;
 
   public constructor(@inject(SERVICES.LOGGER) private readonly logger: Logger, @inject(SERVICES.CONFIG) private readonly config: IConfig) {
     const kc = new K8S.KubeConfig();
-    if (this.config.get<boolean>('kubernetes.loadConfigFromCluster')) {
+    const SHOULD_LOAD_FROM_CLUSTER = this.config.get<boolean>('kubernetes.loadConfigFromCluster');
+    if (SHOULD_LOAD_FROM_CLUSTER) {
       kc.loadFromCluster();
     } else {
       kc.loadFromDefault();
@@ -21,26 +21,14 @@ class K8sOperations {
 
     this.corek8sApi = kc.makeApiClient(K8S.CoreV1Api);
     this.appsK8s = kc.makeApiClient(K8S.AppsV1Api);
-    this.defaultNs = this.config.get<string>('kubernetes.namespace');
   }
 
 
-  public getDeploymentsAndServices = async (): Promise<
-    | K8S.V1Deployment[]
-    | {
-        name: string | undefined;
-        status: string | undefined;
-        image: string | undefined;
-        services: {
-          name: string;
-          uid: string;
-          addresses: string[];
-        }[];
-      }[]
-  > => {
-    const services = await this.getServicesFromCluster();
+  public getDeploymentsAndServices = async (namespace: string): Promise<DepsAndServices[]> => {
+    const services = await this.getServicesFromCluster(namespace);
 
-    const deployment = await this.appsK8s.listNamespacedDeployment(this.defaultNs).then(async (deploymentsRes) => {
+    const deployment = await this.appsK8s.listNamespacedDeployment(namespace)
+    .then(async (deploymentsRes) => {
       const deployItems = deploymentsRes.body.items;
       if (deployItems.length === 0) {
         return [];
@@ -49,11 +37,11 @@ class K8sOperations {
       const deployments = [];
 
       for (const deployment of deployItems) {
-        const addressList = await this.getAddressListForService(deployment.metadata?.name as string);
+        const addressList = await this.getAddressListForService(namespace, deployment.metadata?.name as string);
 
         const depServices = services.items
           .filter((svc) => svc.metadata?.name === deployment.metadata?.name)
-          .reduce((acc: { name: string; uid: string; addresses: string[] }[], svc) => {
+          .reduce((acc: K8sService[], svc) => {
             return [
               ...acc,
               {
@@ -77,8 +65,8 @@ class K8sOperations {
     return deployment;
   };
 
-  private readonly getAddressListForService = async (serviceName: string): Promise<string[]> => {
-    const endpoints = await this.getEndpoints();
+  private readonly getAddressListForService = async (namespace: string, serviceName: string): Promise<string[]> => {
+    const endpoints = await this.getEndpoints(namespace);
 
     const serviceEndpoint = endpoints.items.find((endpoint) => endpoint.metadata?.name === serviceName);
 
@@ -103,12 +91,12 @@ class K8sOperations {
   };
 
 
-  private readonly getEndpoints = async (): Promise<V1EndpointsList> => {
-    const ep = await this.corek8sApi.listNamespacedEndpoints(this.defaultNs);
+  private readonly getEndpoints = async (namespace: string): Promise<V1EndpointsList> => {
+    const ep = await this.corek8sApi.listNamespacedEndpoints(namespace);
     return ep.body;
   };
-  private readonly getServicesFromCluster = async (): Promise<V1ServiceList> => {
-    const svcs = await this.corek8sApi.listNamespacedService(this.defaultNs);
+  private readonly getServicesFromCluster = async (namespace: string): Promise<V1ServiceList> => {
+    const svcs = await this.corek8sApi.listNamespacedService(namespace);
     return svcs.body;
   };
 }
