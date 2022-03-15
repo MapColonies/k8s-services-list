@@ -63,14 +63,3 @@ ingress:
   cors:
     enabled: true
     origin: '*'
-
-kubernetes: 
-<<<<<<< HEAD
-  namespace: "default"
-=======
-  namespaces:
-    - "default"
-    - "client"
->>>>>>> cdf126ca071629292c2ded7f85624959d5eba732
-  loadConfigFromCluster: true
-  
