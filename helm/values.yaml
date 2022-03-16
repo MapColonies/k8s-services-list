@@ -21,7 +21,7 @@ caPath: '/usr/local/share/ca-certificates'
 caKey: 'ca.crt'
 
 image:
-  repository: service-discovery
+  repository: k8s-services-list
   tag: 'latest'
 
 env:
