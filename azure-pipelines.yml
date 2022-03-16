@@ -45,4 +45,4 @@ stages:
               #appName: mapproxinator
               appName: 'k8s-services-list'
               teamName: 'client'
-              bumpPipeline: '95'
+              bumpPipeline: '97'
