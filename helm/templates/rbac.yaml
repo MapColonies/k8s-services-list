@@ -1,0 +1,51 @@
+{{- $releaseName := .Release.Name -}}
+{{- $chartName := include "service-discovery.name" . -}}
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $releaseName }}-{{ $chartName }}
+  namespace: {{ .Release.Namespace}}
+  labels:
+    app: {{ $chartName }}
+    component: {{ $chartName }}
+    environment: {{ include "service-discovery.environment" . }}
+    release: {{ $releaseName }}
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ $releaseName }}-{{ $chartName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ $chartName }}
+    component: {{ $chartName }}
+    environment: {{ include "service-discovery.environment" . }}
+    release: {{ $releaseName }}
+rules:
+- apiGroups: [""]
+  resources: ["endpoints", "services"]
+  verbs: ["get", "watch", "list"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["get", "watch", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ $releaseName }}-{{ $chartName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ $chartName }}
+    component: {{ $chartName }}
+    environment: {{ include "service-discovery.environment" . }}
+    release: {{ $releaseName }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ $releaseName }}-{{ $chartName }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ $releaseName }}-{{ $chartName }}
+    namespace: {{ .Release.Namespace }}

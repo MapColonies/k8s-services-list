@@ -12,5 +12,6 @@ export const SERVICES: Record<string, symbol> = {
   CONFIG: Symbol('Config'),
   TRACER: Symbol('Tracer'),
   METER: Symbol('Meter'),
+  K8S_OPERATIONS: Symbol('K8sOperations'),
 };
 /* eslint-enable @typescript-eslint/naming-convention */

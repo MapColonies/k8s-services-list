@@ -14,7 +14,7 @@ FROM node:12.20.1-alpine3.9 as production
 RUN apk add dumb-init
 
 ENV NODE_ENV=production
-ENV SERVER_PORT=8080
+ENV SERVER_PORT=3000
 
 
 WORKDIR /usr/src/app
@@ -28,5 +28,5 @@ COPY --chown=node:node ./config ./config
 
 
 USER node
-EXPOSE 8080
+EXPOSE 3000
 CMD ["dumb-init", "node", "--max_old_space_size=512", "./index.js"]
