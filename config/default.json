@@ -26,7 +26,7 @@
     }
   },
   "kubernetes": {
-    "namespace": "client",
+    "namespace": "default",
     "loadConfigFromCluster": false
   }
 }
