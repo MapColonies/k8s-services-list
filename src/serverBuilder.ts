@@ -18,7 +18,7 @@ export class ServerBuilder {
   public constructor(
     @inject(SERVICES.CONFIG) private readonly config: IConfig,
     @inject(SERVICES.LOGGER) private readonly logger: Logger,
-    @inject(GET_SERVICES_FROM_K8S_ROUTER_SYMBOL) private readonly getK8sServices: Router,
+    @inject(GET_SERVICES_FROM_K8S_ROUTER_SYMBOL) private readonly getK8sServices: Router
   ) {
     this.serverInstance = express();
   }

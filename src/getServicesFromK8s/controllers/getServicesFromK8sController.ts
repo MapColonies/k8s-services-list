@@ -23,7 +23,7 @@ export default class GetServicesFromK8sController {
 
   public getDeploymentsAndServicesFromCluster: GetServicesFromCluster = async (req, res, next) => {
     try {
-      const depsAndSvcs = await this.k8s.getDeploymentsAndServices(this.namespace);    
+      const depsAndSvcs = await this.k8s.getDeploymentsAndServices(this.namespace);
 
       res.send(depsAndSvcs);
     } catch (e) {

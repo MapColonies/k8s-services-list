@@ -6,9 +6,8 @@ import GetServicesFromK8sController from '../controllers/getServicesFromK8sContr
 const getServicesFromK8sRouterFactory: FactoryFunction<Router> = (dependencyContainer) => {
   const router = Router();
   const controller = dependencyContainer.resolve(GetServicesFromK8sController);
-  
-  router.get('/getDeploymentsAndServices', controller.getDeploymentsAndServicesFromCluster);
 
+  router.get('/getDeploymentsAndServices', controller.getDeploymentsAndServicesFromCluster);
 
   return router;
 };

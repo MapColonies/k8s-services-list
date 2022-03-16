@@ -23,12 +23,10 @@ class K8sOperations {
     this.appsK8s = kc.makeApiClient(K8S.AppsV1Api);
   }
 
-
   public getDeploymentsAndServices = async (namespace: string): Promise<DepsAndServices[]> => {
     const services = await this.getServicesFromCluster(namespace);
 
-    const deployment = await this.appsK8s.listNamespacedDeployment(namespace)
-    .then(async (deploymentsRes) => {
+    const deployment = await this.appsK8s.listNamespacedDeployment(namespace).then(async (deploymentsRes) => {
       const deployItems = deploymentsRes.body.items;
       if (deployItems.length === 0) {
         return [];
@@ -89,7 +87,6 @@ class K8sOperations {
 
     return addresses;
   };
-
 
   private readonly getEndpoints = async (namespace: string): Promise<V1EndpointsList> => {
     const ep = await this.corek8sApi.listNamespacedEndpoints(namespace);

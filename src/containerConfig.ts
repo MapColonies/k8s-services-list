@@ -8,7 +8,7 @@ import { SERVICES, SERVICE_NAME } from './common/constants';
 import { tracing } from './common/tracing';
 import { InjectionObject, registerDependencies } from './common/dependencyRegistration';
 import K8sOperations from './common/utils/k8sOperations';
-import { getServicesFromK8sRouterFactory,GET_SERVICES_FROM_K8S_ROUTER_SYMBOL } from './getServicesFromK8s/routes/getServicesFromK8sRouter';
+import { getServicesFromK8sRouterFactory, GET_SERVICES_FROM_K8S_ROUTER_SYMBOL } from './getServicesFromK8s/routes/getServicesFromK8sRouter';
 
 export interface RegisterOptions {
   override?: InjectionObject<unknown>[];
@@ -26,7 +26,7 @@ export const registerExternalValues = (options?: RegisterOptions): DependencyCon
   tracing.start();
   const tracer = trace.getTracer(SERVICE_NAME);
 
-  const k8s = new K8sOperations(logger, config)
+  const k8s = new K8sOperations(logger, config);
 
   const dependencies: InjectionObject<unknown>[] = [
     { token: SERVICES.CONFIG, provider: { useValue: config } },
