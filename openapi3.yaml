@@ -33,6 +33,5 @@ components:
     error:
       type: object
       properties:
-        error: 
+        error:
           type: string
-      
