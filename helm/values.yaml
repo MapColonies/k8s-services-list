@@ -3,27 +3,22 @@ global:
   tracing: {}
   metrics: {}
   environment: {}
-
 enabled: true
 environment: development
 replicaCount: 1
 initialDelaySeconds: 60
-nodePort: 30030 #for minikube deployment only
+nodePort: 30030
 resetOnConfigChange: true
-
 cloudProvider:
-  dockerRegistryUrl: localhost:5001
-  imagePullSecretName: 'my-registry-secret'
+  dockerRegistryUrl: 'localhost:5001'
+  imagePullSecretName: my-registry-secret
   flavor: openshift
-
 caSecretName: ''
-caPath: '/usr/local/share/ca-certificates'
-caKey: 'ca.crt'
-
+caPath: /usr/local/share/ca-certificates
+caKey: ca.crt
 image:
-  repository: service-discovery
-  tag: 'latest'
-
+  repository: k8s-services-list
+  tag: v1.1.1
 env:
   port: 8080
   targetPort: 8080
@@ -34,11 +29,10 @@ env:
   requestPayloadLimit: 1mb
   tracing:
     enabled: false
-    url: http://localhost:55681/v1/trace
+    url: 'http://localhost:55681/v1/trace'
   metrics:
     enabled: false
-    url: http://localhost:55681/v1/metrics
-
+    url: 'http://localhost:55681/v1/metrics'
 resources:
   enabled: true
   value:
@@ -48,18 +42,16 @@ resources:
     requests:
       cpu: 100m
       memory: 128Mi
-
 route:
   enabled: false
   path: /
   timeout:
-    enabled: false # defaults to 30s by openshift
-    duration: 60s # supported units (us, ms, s, m, h, d)
-
+    enabled: false
+    duration: 60s
 ingress:
   enabled: false
   path: /
-  host: 'localhost'
+  host: localhost
   cors:
     enabled: true
     origin: '*'

@@ -6,13 +6,12 @@ info:
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-
 paths:
   /getDeploymentsAndServices:
     get:
       summary: Get deployments and services list
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
