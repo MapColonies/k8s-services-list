@@ -52,7 +52,7 @@ class K8sOperations {
 
         deployments.push({
           name: deployment.metadata?.name,
-          status: deployment.status?.conditions?.[0].status === "True",
+          status: deployment.status?.conditions?.[0].status === 'True',
           image: deployment.spec?.template.spec?.containers[0].image,
           services: [...depServices],
         });
