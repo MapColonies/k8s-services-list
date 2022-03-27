@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { FactoryFunction } from 'tsyringe';
-import K8sOperations from '../../common/utils/k8sOperations';
 import GetServicesFromK8sController from '../controllers/getServicesFromK8sController';
 
 const getServicesFromK8sRouterFactory: FactoryFunction<Router> = (dependencyContainer) => {
