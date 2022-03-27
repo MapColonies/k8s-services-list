@@ -1,10 +1,8 @@
 import { Logger } from '@map-colonies/js-logger';
 import { IConfig } from 'config';
 import { RequestHandler } from 'express';
-import httpStatus from 'http-status-codes';
 import { injectable, inject } from 'tsyringe';
 import { SERVICES } from '../../common/constants';
-import { DepsAndServices } from '../../common/interfaces';
 import K8sOperations from '../../common/utils/k8sOperations';
 
 type GetServicesFromCluster = RequestHandler<undefined>;

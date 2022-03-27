@@ -1,7 +1,7 @@
 import { Logger } from '@map-colonies/js-logger';
 import { inject, injectable } from 'tsyringe';
 import * as K8S from '@kubernetes/client-node';
-import { V1Deployment, V1EndpointsList, V1ServiceList } from '@kubernetes/client-node';
+import { V1EndpointsList, V1ServiceList } from '@kubernetes/client-node';
 import { SERVICES } from '../constants';
 import { DepsAndServices, IConfig, K8sService } from '../interfaces';
 
