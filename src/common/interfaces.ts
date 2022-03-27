@@ -18,7 +18,7 @@ export interface K8sService {
 
 export interface DepsAndServices {
   name: string | undefined;
-  status: string | undefined;
+  status: boolean | undefined;
   image: string | undefined;
   services: K8sService[];
 }
