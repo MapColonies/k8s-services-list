@@ -18,10 +18,10 @@ caPath: /usr/local/share/ca-certificates
 caKey: ca.crt
 image:
   repository: k8s-services-list
-  tag: v1.1.2
+  tag: v1.1.1
 env:
-  port: 8080
-  targetPort: 80
+  port: 80
+  targetPort: 8080
   protocol: TCP
   logLevel: info
   logPrettyPrintEnabled: false
