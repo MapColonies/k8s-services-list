@@ -21,7 +21,7 @@ image:
   tag: v1.1.2
 env:
   port: 8080
-  targetPort: 8080
+  targetPort: 80
   protocol: TCP
   logLevel: info
   logPrettyPrintEnabled: false
