@@ -43,7 +43,7 @@ resources:
       cpu: 100m
       memory: 128Mi
 route:
-  enabled: false
+  enabled: true
   path: /
   timeout:
     enabled: false
