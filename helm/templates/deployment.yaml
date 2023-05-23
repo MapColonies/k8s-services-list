@@ -21,14 +21,14 @@ spec:
     matchLabels:
       app: {{ $chartName }}
       release: {{ $releaseName }}
-      run: {{ $releaseName }}-{{ $chartName }}
+      run: {{ $releaseName }}
       {{- include "service-discovery.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
         app: {{ $chartName }}
         release: {{ $releaseName }}
-        run: {{ $releaseName }}-{{ $chartName }}
+        run: {{ $releaseName }}
         {{- include "service-discovery.selectorLabels" . | nindent 8 }}
       {{- if .Values.resetOnConfigChange }}
       annotations:
@@ -39,9 +39,9 @@ spec:
       imagePullSecrets:
         - name: {{ $cloudProviderImagePullSecretName | quote }}
     {{- end }}
-      serviceAccountName: {{ $releaseName }}-{{ $chartName }}
+      serviceAccountName: {{ $releaseName }}
       containers:
-        - name: {{ $releaseName }}-{{ $chartName }}-deployment
+        - name: {{ $releaseName }}-deployment
           {{- with .Values.image }}
           image: {{ $cloudProviderDockerRegistryUrl }}{{ .repository }}:{{ $imageTag }}
           {{- end }}
@@ -62,7 +62,7 @@ spec:
             {{- end }}
           envFrom:
             - configMapRef:
-                name: {{ $releaseName }}-{{ $chartName }}-configmap
+                name: {{ $releaseName }}-configmap
           ports:
             - name: http
               containerPort: {{ .Values.env.targetPort }}
