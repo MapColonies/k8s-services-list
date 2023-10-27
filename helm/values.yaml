@@ -45,6 +45,7 @@ resources:
 route:
   enabled: true
   path: /
+  tls: true
   timeout:
     enabled: false
     duration: 60s
