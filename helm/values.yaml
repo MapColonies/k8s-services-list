@@ -37,11 +37,11 @@ resources:
   enabled: true
   value:
     limits:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 200m
+      memory: 200Mi
     requests:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 50m
+      memory: 200Mi
 route:
   enabled: true
   path: /
