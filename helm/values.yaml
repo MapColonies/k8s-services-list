@@ -51,9 +51,9 @@ route:
     duration: 60s
 ingress:
   enabled: false
-  type: 'nginx-kubernetes' # supported values: 'nginx-org' | 'nginx-kubernetes'
-  path: /
+  type: nginx-kubernetes # supported values: 'nginx-org' | 'nginx-kubernetes'
   host:
+  path: /
   cors:
     enabled: true
     origin: '*'
