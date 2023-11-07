@@ -44,6 +44,7 @@ resources:
       memory: 200Mi
 route:
   enabled: true
+  host:
   path: /
   tls: true
   timeout:
