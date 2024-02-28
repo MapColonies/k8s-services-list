@@ -8,7 +8,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ $releaseName }}
+  name: {{ $releaseName }}-{{ $chartName }}
   labels:
     app: {{ $chartName }}
     component: {{ $chartName }}
@@ -50,7 +50,7 @@ spec:
               value: {{ .Values.env.targetPort | quote }}
           envFrom:
             - configMapRef:
-                name: {{ $releaseName }}-configmap
+                name: {{ $releaseName }}-{{ $chartName }}-configmap
           ports:
             - name: http
               containerPort: {{ .Values.env.targetPort }}
