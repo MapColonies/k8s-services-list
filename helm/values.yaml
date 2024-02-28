@@ -13,9 +13,6 @@ cloudProvider:
   dockerRegistryUrl: localhost:5001
   imagePullSecretName: my-registry-secret
   flavor: openshift
-caSecretName: ''
-caPath: /usr/local/share/ca-certificates
-caKey: ca.crt
 image:
   repository: k8s-services-list
   tag: v1.1.4
