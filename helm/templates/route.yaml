@@ -1,5 +1,5 @@
 {{- $releaseName := .Release.Name -}}
-{{- $chartName := include "service-discovery.name" . -}}
+{{- $chartName := .Chart.Name -}}
 {{- $cloudProviderFlavor := include "service-discovery.cloudProviderFlavor" . -}}
 {{- if and (and (.Values.enabled) (eq $cloudProviderFlavor "openshift")) (.Values.route.enabled) -}}
 apiVersion: route.openshift.io/v1
