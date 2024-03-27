@@ -1,6 +1,5 @@
 {{- $releaseName := .Release.Name -}}
 {{- $chartName := include "service-discovery.name" . -}}
-{{- $cloudProviderFlavor := include "service-discovery.cloudProviderFlavor" . -}}
 {{- $cloudProviderDockerRegistryUrl := include "service-discovery.cloudProviderDockerRegistryUrl" . -}}
 {{- $cloudProviderImagePullSecretName := include "service-discovery.cloudProviderImagePullSecretName" . -}}
 {{- $imageTag := include "service-discovery.tag" . -}}
