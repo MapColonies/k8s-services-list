@@ -40,7 +40,7 @@ resources:
       cpu: 50m
       memory: 200Mi
 route:
-  enabled: true
+  enabled: false
   host:
   path: /
   tls: true
