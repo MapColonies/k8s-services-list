@@ -44,6 +44,9 @@ spec:
           {{- with .Values.image }}
           image: {{ $cloudProviderDockerRegistryUrl }}{{ .repository }}:{{ $imageTag }}
           {{- end }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsUser: 0
           env:
             - name: SERVER_PORT
               value: {{ .Values.env.targetPort | quote }}
