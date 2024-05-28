@@ -46,7 +46,7 @@ spec:
           {{- end }}
           securityContext:
             allowPrivilegeEscalation: false
-            runAsUser: 0
+            # runAsUser: 0
           env:
             - name: SERVER_PORT
               value: {{ .Values.env.targetPort | quote }}
