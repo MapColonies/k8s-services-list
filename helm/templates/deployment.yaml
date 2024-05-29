@@ -46,7 +46,7 @@ spec:
           {{- end }}
           securityContext:
             runAsNonRoot: true
-            runAsUser: 1001050000
+            runAsUser: {{ .Values.runAsUser }}
           env:
             - name: SERVER_PORT
               value: {{ .Values.env.targetPort | quote }}
