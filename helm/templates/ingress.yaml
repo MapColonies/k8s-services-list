@@ -1,3 +1,7 @@
+{{- $COMPONENT_NAME := "backend" -}}
+{{ include "mc-chart.ingress" (dict "COMPONENT_NAME" $COMPONENT_NAME "context" .) }}
+
+{{/*
 {{- $releaseName := .Release.Name -}}
 {{- $chartName := .Chart.Name -}}
 {{- if and (.Values.enabled) (.Values.ingress.enabled) -}}
@@ -41,3 +45,4 @@ spec:
     - {{ .Values.ingress.host | quote }}
     secretName: {{ .Values.ingress.tls.useExternal | quote }}
 {{- end -}}
+*/}}

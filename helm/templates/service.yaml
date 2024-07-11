@@ -1,3 +1,10 @@
+
+{{- $MAIN_OBJECT_BLOCK := "configValues" -}}
+{{- $COMPONENT_NAME := "backend" -}}
+{{ include "mc-chart.service" (dict "MAIN_OBJECT_BLOCK" $MAIN_OBJECT_BLOCK "COMPONENT_NAME" $COMPONENT_NAME "context" .) }}
+
+
+{{/*
 {{- $releaseName := .Release.Name -}}
 {{- $chartName := .Chart.Name -}}
 {{- $cloudProviderFlavor := include "service-discovery.cloudProviderFlavor" . -}}
@@ -30,3 +37,4 @@ spec:
     run: {{ $releaseName }}
     {{- include "service-discovery.selectorLabels" . | nindent 4 }}
 {{- end }}
+*/}}

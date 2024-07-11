@@ -1,3 +1,4 @@
+{{/*
 {{- $releaseName := .Release.Name -}}
 {{- $chartName := include "service-discovery.name" . -}}
 apiVersion: v1
@@ -49,3 +50,4 @@ subjects:
   - kind: ServiceAccount
     name: {{ $releaseName }}
     namespace: {{ .Release.Namespace }}
+*/}}

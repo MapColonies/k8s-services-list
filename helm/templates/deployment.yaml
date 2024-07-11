@@ -1,3 +1,8 @@
+{{- $MAIN_OBJECT_BLOCK := "configValues" -}}
+{{- $COMPONENT_NAME := "backend" -}}
+{{ include "mc-chart.deployment" (dict "MAIN_OBJECT_BLOCK" $MAIN_OBJECT_BLOCK "COMPONENT_NAME" $COMPONENT_NAME "context" .) }}
+
+{{/*
 {{- $releaseName := .Release.Name -}}
 {{- $chartName := include "service-discovery.name" . -}}
 {{- $cloudProviderDockerRegistryUrl := include "service-discovery.cloudProviderDockerRegistryUrl" . -}}
@@ -67,3 +72,4 @@ spec:
             {{- toYaml .Values.resources.value | nindent 12 }}
           {{- end }}
 {{- end -}}
+*/}}
