@@ -1,4 +1,7 @@
 global:
+  ## Configuration Manager
+  configManagment:
+    enabled: true
   cloudProvider: # GOING TO BE DELETED
     dockerRegistryUrl: localhost:5001
     imagePullSecretName: my-registry-secret

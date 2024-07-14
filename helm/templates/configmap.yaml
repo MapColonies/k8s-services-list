@@ -3,13 +3,13 @@
 {{- $COMPONENT_NAME := "backend" -}}
 
 {{- define "confMapData" -}}
+{{- $CONFIG_MANAGER_OBJECT := include "common.tplvalues.getGlobalObject" (dict "objName" "configManagment" "context" .) | fromYaml }}
+{{- if not $CONFIG_MANAGER_OBJECT.enabled -}}
   REQUEST_PAYLOAD_LIMIT: {{ .Values.env.requestPayloadLimit | quote }}
   RESPONSE_COMPRESSION_ENABLED: {{ .Values.env.responseCompressionEnabled | quote }}
-  LOG_LEVEL: {{ .Values.env.logLevel | quote }}
-  LOG_PRETTY_PRINT_ENABLED: {{ .Values.env.logPrettyPrintEnabled | quote }}
-  K8S_NAMESPACE: {{ .Release.Namespace }}
+{{- end }}
+  K8S_NAMESPACE: {{ include "common.names.namespace" . }}
   K8S_LOAD_CONFIG_FROM_CLUSTER: "true"
 {{- end -}}
 
 {{ include "mc-chart.configmap" (dict "MAIN_OBJECT_BLOCK" $MAIN_OBJECT_BLOCK "COMPONENT_NAME" $COMPONENT_NAME "DATA" $DATA "WITH_TELEMETRY_TRACING" false "WITH_TELEMETRY_METRICS" false "context" .)}}
-
