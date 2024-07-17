@@ -9,7 +9,7 @@ replicaCount: 1
 initialDelaySeconds: 60
 nodePort: 30030
 resetOnConfigChange: true
-runAsUser: 1001050000
+runAsUser: 1000720000
 cloudProvider:
   dockerRegistryUrl: localhost:5001
   imagePullSecretName: my-registry-secret
