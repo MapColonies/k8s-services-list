@@ -1,6 +1,6 @@
 {{- $MAIN_OBJECT_BLOCK := "configValues" -}}
 {{- $COMPONENT_NAME := "backend" -}}
-{{ include "mc-chart.route" (dict "COMPONENT_NAME" $COMPONENT_NAME "context" .) }}
+{{ include "mc-chart.route" (dict "MAIN_OBJECT_BLOCK" $MAIN_OBJECT_BLOCK "COMPONENT_NAME" $COMPONENT_NAME "context" .) }}
 
 {{/*
 {{- $releaseName := .Release.Name -}}
