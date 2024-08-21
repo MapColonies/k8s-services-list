@@ -1,16 +1,14 @@
 global:
-  ## Configuration Manager
   configManagment:
     enabled: true
-  cloudProvider: # GOING TO BE DELETED
-    dockerRegistryUrl: localhost:5001
-    imagePullSecretName: my-registry-secret
-    flavor: openshift 
+  imageRegistry: acrarolibotnonprod.azurecr.io
+  imagePullSecrets:
+    - my-registry
   deploymentFlavor: openshift
   tlsCertificates:
     certificate:
+    key:
     caCertificate:
-    key:                
   tracing:
     enabled: false
     url: http://localhost:55681/v1/traces
@@ -20,12 +18,10 @@ global:
   environment: development
   releaseVersion: DUMMY_releaseVersion
   currentSubChart: DUMMY_currentSubChart
-  imagePullSecrets:
+
 kubeVersion:
 commonLabels:
 commonAnnotations:
-serviceAccount:
-  create: true
 # ----------- initContainers -----------
 volumePermissions:
   enabled: false
@@ -36,22 +32,27 @@ persistence:
 diagnosticMode:
   enabled: false
 configValues:
+  extraEnvVars:
+    - name: SERVER_PORT
+      value: '{{ .Values.configValues.containerPorts.http }}'
   autoscaling:
     hpa:
       enabled: false
   podAnnotations:
-    enabled: false  #used to be true
-    resetOnConfigChange: false  #used to be true
+    enabled: true
+    resetOnConfigChange: true
     annotations: {}
   image:
     repository: k8s-services-list
     tag: v1.1.4
+    pullPolicy: Always
   nodeAffinityPreset: {}
   podSecurityContext: {}
   containerSecurityContext: {}
   resourcesPreset: nano
-  containerPorts: #UNNECESSARY
-    http: 8000
+  containerPorts:
+    http: 8080
+    https: 443
   livenessProbe:
     enabled: false
   readinessProbe:
@@ -68,11 +69,8 @@ enabled: true
 environment: development
 initialDelaySeconds: 60
 nodePort: 30030
-runAsUser: 1001050000
+runAsUser: 1000700000
 env:
-  port: 80
-  targetPort: 8080
-  protocol: TCP
   logLevel: info
   logPrettyPrintEnabled: false
   responseCompressionEnabled: true
@@ -87,17 +85,20 @@ resources:
       cpu: 50m
       memory: 200Mi
 route:
-  enabled: false
-  # host:
-  # path: /
-  # tls: 
-  #   enabled: true
-  #   useCerts: true
-  #   termination: edge
-  #   insecureEdgeTerminationPolicy: Redirect
-  # timeout:
-  #   enabled: false
-  #   duration: 60s
+  enabled: true
+  annotations:
+    haproxy.router.openshift.io/rewrite-target: /
+  timeout:
+    enabled: false
+    duration: 60s
+  hostname:
+  path: /
+  tls: 
+    enabled: true
+    useCerts: false
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  extraRules:
 ingress:
   enabled: false
   # apiVersion: ""
@@ -107,19 +108,19 @@ ingress:
   # hostname: COMPONENT_NAME.local
   # extraHosts: []
   # extraPaths: []
-  # path: /
+  # path: /service-discovery
   # extraRules: []
   # extraTls: []
   # selfSigned: false
   # tls: true
-  # host:
   # cors:
   #   enabled: true
   #   origin: '*'
 service:
   annotations: {}
   ports:
-    http:
+    http: 80
+  protocol: TCP
 serviceAccount:
   ## @param serviceAccount.create Specifies whether a ServiceAccount should be created
   ##
@@ -154,7 +155,7 @@ rbac:
     - apiGroups:
         - apps
       resources:
-        - deployment
+        - deployments
       verbs:
         - get 
         - watch
