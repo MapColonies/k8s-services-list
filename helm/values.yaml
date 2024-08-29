@@ -1,6 +1,6 @@
 global:
   configManagment:
-    enabled: true
+    enabled: false
   imageRegistry: acrarolibotnonprod.azurecr.io
   imagePullSecrets:
     - my-registry
@@ -22,15 +22,16 @@ global:
 kubeVersion:
 commonLabels:
 commonAnnotations:
-# ----------- initContainers -----------
+# ----------- initContainers ----------
 volumePermissions:
   enabled: false
-# ------ volumes and volumeMounts ------
+# ------ volumes and volumeMounts -----
 persistence:
   enabled: false
-# ------------ command/debug -----------
+# ----------- command/debug -----------
 diagnosticMode:
   enabled: false
+# --------- MAIN_OBJECT_BLOCK ---------
 configValues:
   extraEnvVars:
     - name: SERVER_PORT
