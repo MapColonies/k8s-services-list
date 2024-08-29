@@ -33,58 +33,66 @@ diagnosticMode:
   enabled: false
 # --------- MAIN_OBJECT_BLOCK ---------
 configValues:
-  extraEnvVars:
-    - name: SERVER_PORT
-      value: '{{ .Values.configValues.containerPorts.http }}'
+  deploymentAnnotations:
+    # collectord.io/index: '' # PROVIDE SPLUNK INDEX
   autoscaling:
     hpa:
       enabled: false
+  replicaCount: 1
   podAnnotations:
     enabled: true
     resetOnConfigChange: true
     annotations: {}
-  image:
-    repository: k8s-services-list
-    tag: v1.1.4
-    pullPolicy: Always
-  nodeAffinityPreset: {}
-  podSecurityContext: {}
-  containerSecurityContext: {}
-  resourcesPreset: nano
-  containerPorts:
-    http: 8080
-    https: 443
-  livenessProbe:
-    enabled: false
-  readinessProbe:
-    enabled : false
-  startupProbe:
-    enabled : false
-  replicaCount: 1
   prometheus:
     scrape: false
   metrics:
     enabled: false
-  automountServiceAccountToken: false
-enabled: true
-environment: development
-initialDelaySeconds: 60
-nodePort: 30030
-runAsUser: 1000700000
-env:
-  logLevel: info
-  logPrettyPrintEnabled: false
-  responseCompressionEnabled: true
-  requestPayloadLimit: 1mb
-resources:
-  enabled: true
-  value:
+  tracing:
+    enabled: false
+  nodeAffinityPreset: {}
+  podSecurityContext: {}
+  # ----------- containers ------------
+  image:
+    repository: k8s-services-list
+    tag: v1.1.4
+    pullPolicy: Always
+    debug: false
+  containerSecurityContext:
+    enabled: true
+    runAsNonRoot: true
+    runAsUser: 1000700000
+  extraEnvVars:
+    - name: SERVER_PORT
+      value: '{{ .Values.configValues.containerPorts.http }}'
+  extraEnvVarsCM: '{{ template "common.names.fullname" . }}'
+  extraEnvVarsSecret:
+  resources:
     limits:
       cpu: 200m
       memory: 200Mi
     requests:
       cpu: 50m
       memory: 200Mi
+  containerPorts:
+    http: 8080
+    https: 443
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+  readinessProbe:
+    enabled : false
+  startupProbe:
+    enabled : false
+  automountServiceAccountToken: false
+env:
+  logLevel: info
+  logPrettyPrintEnabled: false
+  responseCompressionEnabled: true
+  requestPayloadLimit: 1mb
 route:
   enabled: true
   annotations:
@@ -94,11 +102,10 @@ route:
     duration: 60s
   hostname:
   path: /
+  targetPort: http
   tls: 
     enabled: true
     useCerts: false
-    termination: edge
-    insecureEdgeTerminationPolicy: Redirect
   extraRules:
 ingress:
   enabled: false
@@ -133,10 +140,6 @@ serviceAccount:
   ## @param serviceAccount.annotations Additional Service Account annotations (evaluated as a template)
   ##
   annotations: {}
-  ## @param serviceAccount.automountServiceAccountToken Automount service account token for the server service account
-  ##
-  automountServiceAccountToken: false
-
 rbac:
   ## @param rbac.create Specifies whether RBAC resources should be created
   ##
