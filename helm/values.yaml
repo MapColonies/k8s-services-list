@@ -105,6 +105,7 @@ route:
   targetPort: http
   tls: 
     enabled: true
+    termination: edge
     useCerts: false
   extraRules:
 ingress:
