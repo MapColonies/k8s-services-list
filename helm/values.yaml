@@ -106,6 +106,7 @@ route:
   tls: 
     enabled: true
     termination: edge
+    insecureEdgeTerminationPolicy: Redirect
     useCerts: false
   extraRules:
 ingress:
