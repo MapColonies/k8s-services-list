@@ -87,7 +87,6 @@ configValues:
     enabled : false
   startupProbe:
     enabled : false
-  automountServiceAccountToken: false
 env:
   logLevel: info
   logPrettyPrintEnabled: false
