@@ -1,6 +1,6 @@
 {
-  "name": "service-name",
-  "version": "1.1.0",
+  "name": "k8s-services-list",
+  "version": "1.1.4",
   "description": "This is template for map colonies typescript service",
   "main": "./src/index.ts",
   "scripts": {

@@ -1,60 +1,159 @@
 global:
-  cloudProvider: {}
-  tracing: {}
-  metrics: {}
-  environment: ''
-enabled: true
-environment: development
-replicaCount: 1
-initialDelaySeconds: 60
-nodePort: 30030
-resetOnConfigChange: true
-runAsUser: 1001050000
-cloudProvider:
-  dockerRegistryUrl: localhost:5001
-  imagePullSecretName: my-registry-secret
-  flavor: openshift
-image:
-  repository: k8s-services-list
-  tag: v1.1.4
-env:
-  port: 80
-  targetPort: 8080
-  protocol: TCP
-  logLevel: info
-  logPrettyPrintEnabled: false
-  responseCompressionEnabled: true
-  requestPayloadLimit: 1mb
+  configManagment:
+    enabled: false
+  imageRegistry: acrarolibotnonprod.azurecr.io
+  imagePullSecrets:
+    - my-registry
+  deploymentFlavor: openshift
+  tlsCertificates:
+    certificate:
+    key:
+    caCertificate:
   tracing:
     enabled: false
     url: http://localhost:55681/v1/traces
   metrics:
     enabled: false
     url: http://localhost:55681/v1/metrics
-resources:
-  enabled: true
-  value:
+  environment: development
+  releaseVersion: DUMMY_releaseVersion
+  currentSubChart: DUMMY_currentSubChart
+
+kubeVersion:
+commonLabels:
+commonAnnotations:
+# ----------- initContainers ----------
+volumePermissions:
+  enabled: false
+# ------ volumes and volumeMounts -----
+persistence:
+  enabled: false
+# ----------- command/debug -----------
+diagnosticMode:
+  enabled: false
+# --------- MAIN_OBJECT_BLOCK ---------
+configValues:
+  deploymentAnnotations:
+    # collectord.io/index: '' # PROVIDE SPLUNK INDEX
+  autoscaling:
+    hpa:
+      enabled: false
+  replicaCount: 1
+  podAnnotations:
+    enabled: true
+    resetOnConfigChange: true
+    annotations: {}
+  prometheus:
+    scrape: false
+  metrics:
+    enabled: false
+  tracing:
+    enabled: false
+  nodeAffinityPreset: {}
+  podSecurityContext: {}
+  # ----------- containers ------------
+  image:
+    repository: k8s-services-list
+    tag: v1.1.4
+    pullPolicy: Always
+    debug: false
+  containerSecurityContext:
+    enabled: true
+    runAsNonRoot: true
+    runAsUser: 1000700000
+  extraEnvVars:
+    - name: SERVER_PORT
+      value: '{{ .Values.configValues.containerPorts.http }}'
+  extraEnvVarsCM: '{{ template "common.names.fullname" . }}'
+  extraEnvVarsSecret:
+  resources:
     limits:
       cpu: 200m
       memory: 200Mi
     requests:
       cpu: 50m
       memory: 200Mi
+  containerPorts:
+    http: 8080
+    https: 443
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
+  readinessProbe:
+    enabled : false
+  startupProbe:
+    enabled : false
+env:
+  logLevel: info
+  logPrettyPrintEnabled: false
+  responseCompressionEnabled: true
+  requestPayloadLimit: 1mb
 route:
-  enabled: false
-  host:
-  path: /
-  tls: true
+  enabled: true
+  annotations:
+    haproxy.router.openshift.io/rewrite-target: /
   timeout:
     enabled: false
     duration: 60s
+  hostname:
+  path: /
+  targetPort: http
+  tls: 
+    enabled: true
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+    useCerts: false
+  extraRules:
 ingress:
   enabled: false
-  type: nginx-kubernetes # supported values: 'nginx-org' | 'nginx-kubernetes'
-  host:
-  path: /
-  cors:
-    enabled: true
-    origin: '*'
-  tls:
-    useExternal:
+  # apiVersion: ""
+  # type: nginx-kubernetes
+  # annotations: {}
+  # pathType: Prefix
+  # hostname: COMPONENT_NAME.local
+  # extraHosts: []
+  # extraPaths: []
+  # path: /service-discovery
+  # extraRules: []
+  # extraTls: []
+  # selfSigned: false
+  # tls: true
+  # cors:
+  #   enabled: true
+  #   origin: '*'
+service:
+  annotations: {}
+  ports:
+    http: 80
+  protocol: TCP
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+rbac:
+  create: true
+  rules:
+    - apiGroups:
+        - apps
+      resources:
+        - deployments
+      verbs:
+        - get 
+        - watch
+        - list
+    - apiGroups: 
+        - ""
+      resources:
+        - endpoints 
+        - services
+      verbs:
+        - get 
+        - watch
+        - list
+podSecurityPolicy:
+  create: false
+  enabled: false
