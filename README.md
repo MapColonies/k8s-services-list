@@ -1,62 +1,7 @@
-# Map Colonies typescript service template
+# k8s Services List
 
-----------------------------------
+Kubernetes service discovery
 
-![badge-alerts-lgtm](https://img.shields.io/lgtm/alerts/github/MapColonies/k8s-services-list?style=for-the-badge)
-
-![grade-badge-lgtm](https://img.shields.io/lgtm/grade/javascript/github/MapColonies/k8s-services-list?style=for-the-badge)
-
-![snyk](https://img.shields.io/snyk/vulnerabilities/github/MapColonies/k8s-services-list?style=for-the-badge)
-
-----------------------------------
-
-This is a basic repo template for building new MapColonies web services in Typescript.
-
-### Template Features:
-
-- eslint configuration by [@map-colonies/eslint-config](https://github.com/MapColonies/eslint-config)
-
-- prettier configuration by [@map-colonies/prettier-config](https://github.com/MapColonies/prettier-config)
-
-- jest
-
-- .nvmrc
-
-- Multi stage producton-ready Dockerfile
-
-- commitlint
-
-- git hooks
-
-- logging by [@map-colonies/js-logger](https://github.com/MapColonies/js-logger)
-
-- OpenAPI request validation
-
-- config load with [node-config](https://www.npmjs.com/package/node-config)
-
-- Tracing and metrics by [@map-colonies/telemetry](https://github.com/MapColonies/telemetry)
-
-- github templates
-
-- bug report
-
-- feature request
-
-- pull request
-
-- github actions
-
-- on pull_request
-
-- LGTM
-
-- test
-
-- lint
-
-- snyk
-
-## API
 Checkout the OpenAPI spec [here](/openapi3.yaml)
 
 ## Installation
@@ -124,3 +69,7 @@ To only run integration tests:
 ```bash
 npm run test:integration
 ```
+
+## Deployment
+
+See [helm values](https://github.com/MapColonies/helm-common/blob/c352a2453117895ec0f9df0267a66d6f5b9c2da2/README.md)
