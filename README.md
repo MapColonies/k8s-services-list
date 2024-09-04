@@ -21,33 +21,25 @@ npx husky install
 Clone the project
 
 ```bash
-
-git clone https://link-to-project
-
+git clone git@github.com:MapColonies/k8s-services-list.git
 ```
 
 Go to the project directory
 
 ```bash
-
-cd my-project
-
+cd k8s-services-list
 ```
 
 Install dependencies
 
 ```bash
-
 npm install
-
 ```
 
 Start the server
 
 ```bash
-
 npm run start
-
 ```
 
 ## Running Tests
@@ -55,9 +47,7 @@ npm run start
 To run tests, run the following command
 
 ```bash
-
 npm run test
-
 ```
 
 To only run unit tests:
