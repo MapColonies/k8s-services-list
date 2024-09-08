@@ -19,7 +19,6 @@ global:
   releaseVersion: DUMMY_releaseVersion
   currentSubChart: DUMMY_currentSubChart
 
-kubeVersion:
 commonLabels:
 commonAnnotations:
 # ----------- initContainers ----------
@@ -36,8 +35,7 @@ configValues:
   deploymentAnnotations:
     # collectord.io/index: '' # PROVIDE SPLUNK INDEX
   autoscaling:
-    hpa:
-      enabled: false
+    enabled: false
   replicaCount: 1
   podAnnotations:
     enabled: true
@@ -130,8 +128,6 @@ service:
   protocol: TCP
 serviceAccount:
   create: true
-  name: ""
-  annotations: {}
 rbac:
   create: true
   rules:
