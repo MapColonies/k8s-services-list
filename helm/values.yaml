@@ -149,5 +149,4 @@ rbac:
         - watch
         - list
 podSecurityPolicy:
-  create: false
   enabled: false
