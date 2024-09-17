@@ -81,9 +81,9 @@ configValues:
     failureThreshold: 3
     successThreshold: 1
   readinessProbe:
-    enabled : false
+    enabled: false
   startupProbe:
-    enabled : false
+    enabled: false
 env:
   logLevel: info
   logPrettyPrintEnabled: false
