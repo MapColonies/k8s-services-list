@@ -20,6 +20,9 @@ global:
   releaseVersion: DUMMY_releaseVersion
   currentSubChart: DUMMY_currentSubChart
 
+nameOverride:
+fullnameOverride:
+# --------------- common --------------
 commonLabels:
 commonAnnotations:
 # ----------- initContainers ----------
