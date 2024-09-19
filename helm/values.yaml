@@ -84,7 +84,12 @@ configValues:
     failureThreshold: 3
     successThreshold: 1
   readinessProbe:
-    enabled: false
+    enabled: true
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 1
+    failureThreshold: 3
+    successThreshold: 1
   startupProbe:
     enabled: false
 env:
