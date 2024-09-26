@@ -12,3 +12,5 @@ node_modules
 *.html
 coverage
 helm
+.vscode/settings.json
+schemas/*.json
