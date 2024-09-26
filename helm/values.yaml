@@ -29,6 +29,8 @@ configValues:
     enabled: false
   tracing:
     enabled: false
+  podSecurityContext:
+    enabled: false
   # ----------- containers ------------
   image:
     repository: k8s-services-list
