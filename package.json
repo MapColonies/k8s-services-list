@@ -23,7 +23,8 @@
     "install": "npx husky install",
     "helm-update": "helm dependency update helm",
     "helm-assets": "npm run helm-update && tar -xzvf ./helm/charts/helm-common*.tgz --strip-components=1 helm-common/schemas",
-    "helm-install": "npm run helm-update && helm install -f 'helm/global.yaml' -f 'helm/values.yaml' k8s-services-list helm"
+    "helm-install": "npm run helm-update && helm install -f 'helm/global.yaml' -f 'helm/values.yaml' k8s-services-list helm",
+    "helm-uninstall": "helm uninstall k8s-services-list"
   },
   "directories": {
     "test": "tests"
