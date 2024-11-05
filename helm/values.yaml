@@ -87,7 +87,7 @@ route:
   hostname:
   path: /
   targetPort: http
-  tls: 
+  tls:
     enabled: true
     termination: edge
     insecureEdgeTerminationPolicy: Redirect
