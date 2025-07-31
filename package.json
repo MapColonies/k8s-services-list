@@ -13,7 +13,6 @@
     "lint:openapi": "openapi lint ./openapi3.yaml",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "release": "standard-version",
     "test": "npm run test:unit && npm run test:integration",
     "prebuild": "npm run clean",
     "build": "tsc --project tsconfig.build.json  && npm run assets:copy",
@@ -35,11 +34,6 @@
     "hooks": {
       "pre-commit": "pretty-quick --staged",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
     }
   },
   "dependencies": {
@@ -69,8 +63,6 @@
     "@commitlint/config-conventional": "^13.2.0",
     "@map-colonies/eslint-config": "^3.0.1",
     "@map-colonies/prettier-config": "0.0.1",
-    "@map-colonies/standard-version-update-helm-version": "^2.0.1",
-    "@map-colonies/standard-version-update-openapi3-version": "0.0.2",
     "@redocly/openapi-cli": "^1.0.0-beta.63",
     "@types/compression": "^1.7.2",
     "@types/config": "0.0.39",
@@ -82,7 +74,6 @@
     "@types/swagger-ui-express": "^4.1.3",
     "commitlint": "^13.2.1",
     "copyfiles": "^2.4.1",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.0.1",
     "husky": "^7.0.2",
     "jest": "^27.3.1",
@@ -93,7 +84,6 @@
     "prettier": "^2.4.1",
     "pretty-quick": "^3.1.1",
     "rimraf": "^3.0.2",
-    "standard-version": "^9.3.2",
     "supertest": "^6.1.6",
     "ts-jest": "^27.0.7",
     "typescript": "^4.2.4"
