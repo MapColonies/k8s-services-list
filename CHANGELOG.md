@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/MapColonies/k8s-services-list/compare/v1.2.0...v1.3.0) (2025-07-31)
+
+
+### Features
+
+* values schemas integration ([3b35870](https://github.com/MapColonies/k8s-services-list/commit/3b3587042ff07cc14c886afea1ad6e6c24bab361))
+* values schemas integration ([946eb5c](https://github.com/MapColonies/k8s-services-list/commit/946eb5c18de9852efaa9e59def3c38abd71faa9c))
+
+
+### Bug Fixes
+
+* helm artifacts ([f56a5e4](https://github.com/MapColonies/k8s-services-list/commit/f56a5e4e3eb173c624c8270fec9724ac07e50b39))
+* ingress ([2c523ca](https://github.com/MapColonies/k8s-services-list/commit/2c523cacd93f86df59d259df3a4601bbf07d8ba0))
+* readme updated ([9637fbd](https://github.com/MapColonies/k8s-services-list/commit/9637fbdfa1a3f3ecfdce7363eca7d16f4b753467))
+* support specific and official routes ([45440ee](https://github.com/MapColonies/k8s-services-list/commit/45440ee7d9e9369cdea2dd96494c4580defcd099))
+* update values ([86e17fa](https://github.com/MapColonies/k8s-services-list/commit/86e17fa113accc8a87e0edecf7558a585cf5fdf4))
+
 ## [1.2.0](https://github.com/MapColonies/k8s-services-list/compare/v1.1.4...v1.2.0) (2024-09-19)
 
 
