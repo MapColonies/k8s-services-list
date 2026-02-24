@@ -6,9 +6,14 @@ info:
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
+servers:
+  - url: /
+    description: relative path
+security: []
 paths:
   /getDeploymentsAndServices:
     get:
+      operationId: getDeploymentsAndServices
       summary: Get deployments and services list
       responses:
         '200':
@@ -17,6 +22,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/res'
+        '400':
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
         '500':
           description: INTERNAL SERVER ERROR
           content:
