@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.1](https://github.com/MapColonies/k8s-services-list/compare/v1.3.0...v1.3.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* artifacts.json in build-and-push.yaml ([6e2f01d](https://github.com/MapColonies/k8s-services-list/commit/6e2f01dd6b61f2a703718ac8f3cc036bd35da6f5))
+* artifacts.json in build-and-push.yaml ([2ccc5ba](https://github.com/MapColonies/k8s-services-list/commit/2ccc5ba6bfdc12156ab61cb0fec6aac1df240686))
+
 ## [1.3.0](https://github.com/MapColonies/k8s-services-list/compare/v1.2.0...v1.3.0) (2026-02-24)
 
 
