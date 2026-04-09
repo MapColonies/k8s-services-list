@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.2](https://github.com/MapColonies/k8s-services-list/compare/v1.3.1...v1.3.2) (2026-04-09)
+
+
+### Bug Fixes
+
+* values ([7941479](https://github.com/MapColonies/k8s-services-list/commit/794147904d8da16bf9156e97d7556a463f502736))
+
 ## [1.3.1](https://github.com/MapColonies/k8s-services-list/compare/v1.3.0...v1.3.1) (2026-03-19)
 
 
