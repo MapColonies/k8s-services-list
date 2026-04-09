@@ -12,6 +12,10 @@ persistence:
 # ----------- command/debug -----------
 diagnosticMode:
   enabled: false
+  # command:
+  #   - sleep
+  # args:
+  #   - infinity
 # --------- MAIN_OBJECT_BLOCK ---------
 configValues:
   deploymentAnnotations:
@@ -33,14 +37,14 @@ configValues:
     enabled: false
   # ----------- containers ------------
   image:
-    repository: k8s-services-list
-    tag: v1.1.4
+    repository: common/k8s-services-list
+    tag: v1.0.0
     pullPolicy: Always
     debug: false
   containerSecurityContext:
     enabled: true
     runAsNonRoot: true
-    runAsUser: 1000700000
+    runAsUser: 1000720000
   extraEnvVars:
     - name: SERVER_PORT
       value: '{{ .Values.configValues.containerPorts.http }}'
