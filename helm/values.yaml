@@ -131,16 +131,16 @@ rbac:
       resources:
         - deployments
       verbs:
-        - get 
+        - get
         - watch
         - list
     - apiGroups: 
         - ""
       resources:
-        - endpoints 
+        - endpoints
         - services
       verbs:
-        - get 
+        - get
         - watch
         - list
 podSecurityPolicy:
