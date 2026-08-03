@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.4](https://github.com/MapColonies/k8s-services-list/compare/v1.3.3...v1.3.4) (2026-08-03)
+
+
+### Bug Fixes
+
+* helm sync with infra ([e974a3a](https://github.com/MapColonies/k8s-services-list/commit/e974a3a45da083ac94cb1da3e94ac580940ad25c))
+* helm sync with infra ([90fd204](https://github.com/MapColonies/k8s-services-list/commit/90fd20471671d5bcf78ca62beea9c222a32733d1))
+
 ## [1.3.3](https://github.com/MapColonies/k8s-services-list/compare/v1.3.2...v1.3.3) (2026-04-09)
 
 
