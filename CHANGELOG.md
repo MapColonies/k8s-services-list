@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.5](https://github.com/MapColonies/k8s-services-list/compare/v1.3.4...v1.3.5) (2026-10-28)
+
+
+### Bug Fixes
+
+* support mclabels ([0fbb3b7](https://github.com/MapColonies/k8s-services-list/commit/0fbb3b7c5eeff64fbc2bad0df7115c1fb69133c9))
+* support mclabels ([98bb0d9](https://github.com/MapColonies/k8s-services-list/commit/98bb0d97f7c1a0688bf6cbea98f128c94ef63640))
+
 ## [1.3.4](https://github.com/MapColonies/k8s-services-list/compare/v1.3.3...v1.3.4) (2026-08-03)
 
 
